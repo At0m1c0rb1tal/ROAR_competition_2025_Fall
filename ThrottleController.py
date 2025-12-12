@@ -60,7 +60,8 @@ class ThrottleController:
         self, current_location, current_speed, current_section, waypoints
     ):
         """
-        Returns throttle and brake values based off the car's current location and the radius of the approaching turn
+        Returns throttle and brake values based off the car's current location
+        and the radius of the approaching turn
         """
 
         nextWaypoint = self.get_next_interesting_waypoints(current_location, waypoints)
@@ -87,7 +88,8 @@ class ThrottleController:
         )
 
         if current_speed > 100:
-            # at high speed use larger spacing between points to look further ahead and detect wide turns.
+            # at high speed use larger spacing between points to look further
+            # ahead and detect wide turns.
             if current_section != 9:
                 r4 = self.get_radius(
                     [
@@ -133,8 +135,8 @@ class ThrottleController:
         Converts speed data into throttle and brake values
         """
         percent_of_max = speed_data.current_speed / speed_data.recommended_speed_now
-        avg_speed_change_per_tick = 2.4  # Speed decrease in kph per tick
-        percent_change_per_tick = 0.075  # speed drop for one time-tick of braking
+        avg_speed_change_per_tick = 2.4 
+        percent_change_per_tick = 0.075
         true_percent_change_per_tick = round(
             avg_speed_change_per_tick / (speed_data.current_speed + 0.001), 5
         )
@@ -184,7 +186,6 @@ class ThrottleController:
                     return -1, 1
 
                 else:
-                    # speed is already dropping fast, ok to throttle because the effect of throttle is delayed
                     self.dprint(
                         "tb: tick "
                         + str(self.tick_counter)
@@ -195,7 +196,6 @@ class ThrottleController:
                     return 1, 0
             else:
                 if speed_change >= 2.5:
-                    # speed is already dropping fast, ok to throttle because the effect of throttle is delayed
                     self.dprint(
                         "tb: tick "
                         + str(self.tick_counter)
@@ -330,7 +330,6 @@ class ThrottleController:
             current_location (roar_py_interface.RoarPyWaypoint): The current location of the car
             more_waypoints ([roar_py_interface.RoarPyWaypoint]): A list of waypoints
 
-
         Returns:
             [roar_py_interface.RoarPyWaypoint]: A list of waypoints within specified distances of the car
         """
@@ -365,12 +364,8 @@ class ThrottleController:
 
     def get_radius(self, wp: [roar_py_interface.RoarPyWaypoint]):
         """Returns the radius of a curve given 3 waypoints using the Menger Curvature Formula
-
-
         Args:
             wp ([roar_py_interface.RoarPyWaypoint]): A list of 3 RoarPyWaypoints
-
-
         Returns:
             float: The radius of the curve made by the 3 given waypoints
         """
@@ -414,27 +409,18 @@ class ThrottleController:
             target_speed = min(target_speed, 200.0)
             print(f"[{current_section}] -- TargetSpeed -- [{target_speed}]")
 
-        #    if current_section == 13:
-        #         # Hard cap for the hairpin. Tune 150–170 as needed.
-        #         target_speed = min(target_speed, 110.0)
-        #         print(f"[{current_section}] -- TargetSpeed -- [{target_speed}]")
-
         if current_section == 16:
-            # Hard cap for the hairpin. Tune 150–170 as needed.
             target_speed = min(target_speed, 140.0)
             print(f"[{current_section}] -- TargetSpeed -- [{target_speed}]")
 
         if current_section == 17:
-            # Just after the hairpin, still be conservative
             target_speed = min(target_speed, 140.0)
             print(f"[{current_section}] -- TargetSpeed -- [{target_speed}]")
 
         if current_section == 19:
-            # This should be noticeably slower but not hairpin-slow
             target_speed = min(target_speed, 125.0)
             print(f"[{current_section}] -- TargetSpeed -- [{target_speed}]")
         if current_section == 20:
-            # This should be noticeably slower but not hairpin-slow
             target_speed = min(target_speed, 60.0)
             print(f"[{current_section}] -- TargetSpeed -- [{target_speed}]")
 

@@ -18,9 +18,6 @@ from LateralController import LatController
 from section_config_21 import SECTION_CONFIG, apply_steer_multiplier
 from ThrottleController import ThrottleController
 
-# from scipy.interpolate import interp1d
-
-
 useDebug = False
 useDebugPrinting = False
 debugData = {}
@@ -276,7 +273,6 @@ class RoarCompetitionSolution:
 
         if self.current_section in (16, 17):
             # Safer steering gain for the hairpin:
-            # less gain at high speed, more at low speed
             if physical_speed_kmh > 160:
                 base_steer_mult = 0.9
             elif physical_speed_kmh > 110:
@@ -311,19 +307,16 @@ class RoarCompetitionSolution:
             self.prev_steer = raw_steer
 
         if self.current_section == 16:
-            # Max change in steer per tick – tune 0.04–0.08 if needed
             max_delta = 0.12
             lower = self.prev_steer - max_delta
             upper = self.prev_steer + max_delta
             smooth_steer = float(np.clip(raw_steer, lower, upper))
         elif self.current_section == 18:
-            # Smaller allowed change per tick – softens that last snap
             max_delta = 0.01  # try 0.06–0.10 range
             lower = self.prev_steer - max_delta
             upper = self.prev_steer + max_delta
             smooth_steer = float(np.clip(raw_steer, lower, upper))
         elif self.current_section in (19, 20):
-            # Smaller allowed change per tick – softens that last snap
             max_delta = 0.06  # try 0.06–0.10 range
             lower = self.prev_steer - max_delta
             upper = self.prev_steer + max_delta
@@ -338,12 +331,11 @@ class RoarCompetitionSolution:
             "brake": np.clip(brake, 0, 1),
             "hand_brake": 0,
             "reverse": 0,
-            "target_gear": gear,  # Gears do not appear to have an impact on speed
+            "target_gear": gear,
         }
 
         # more control the of steer
         if self.current_section == 16:
-            # Needs more authority – it's understeering into the outside wall.
             if physical_speed_kmh > 200:
                 max_steer = 0.30  # was 0.30
             elif physical_speed_kmh > 150:
@@ -366,13 +358,12 @@ class RoarCompetitionSolution:
             control["steer"] = np.clip(control["steer"], -max_steer, max_steer)
         elif self.current_section == 19:
             # FIX: Increase max steer to allow the car to turn enough at speed.
-            # The previous limits (0.40/0.45) caused massive understeer into the left wall.
             if physical_speed_kmh > 150:
-                max_steer = 0.45  # WAS 0.40 -> Much more authority now
+                max_steer = 0.45  
             elif physical_speed_kmh > 80:
-                max_steer = 0.45  # WAS 0.45
+                max_steer = 0.45
             else:
-                max_steer = 0.65  # WAS 0.65 (Allow max steer at low speed)
+                max_steer = 0.65
 
             control["steer"] = np.clip(control["steer"], -max_steer, max_steer)
 
@@ -409,7 +400,8 @@ Steer: {control['steer']:.10f} \n"
 
     def get_lookahead_index(self, speed):
         """
-        Adds the lookahead waypoint to the current waypoint and normalizes it so that the value does not go out of bounds
+        Adds the lookahead waypoint to the current waypoint and
+        normalizes it so that the value does not go out of bounds
         """
         num_waypoints = self.get_lookahead_value(speed)
         return (self.current_waypoint_idx + num_waypoints) % len(
@@ -467,7 +459,6 @@ Steer: {control['steer']:.10f} \n"
 
         # ----- SECTION 16: special tight hairpin logic -----
         if self.current_section == 16:
-            # Local lookahead tuned for the hairpin
             local_lookahead = base_lookahead
             if current_speed > 140:
                 local_lookahead = max(10, int(base_lookahead * 0.8))
@@ -476,10 +467,8 @@ Steer: {control['steer']:.10f} \n"
             else:
                 local_lookahead = max(6, int(base_lookahead * 1.0))
 
-            # Base index
             default_idx = (self.current_waypoint_idx + local_lookahead) % N
 
-            # Limit index jump per tick to avoid target “teleporting”
             if self.last_lookahead_idx_16 is not None:
                 prev_idx = self.last_lookahead_idx_16
 
@@ -519,7 +508,6 @@ Steer: {control['steer']:.10f} \n"
             idx = self.get_lookahead_index(current_speed)
             return self.maneuverable_waypoints[idx]
 
-            # ----- SECTION 0: always use smoothing -----
         if self.current_section == 0:
             return self.average_point(current_speed)
 

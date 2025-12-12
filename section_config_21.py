@@ -1,28 +1,5 @@
 """
 Recommended Section Configuration for 15 Sections
-
-
-This file contains recommended parameters for:
-- Friction coefficients (mu) for speed calculation
-- Steering multipliers for lateral control
-- Waypoint smoothing parameters for path planning
-
-
-Usage:
-   from section_config_15 import SECTION_CONFIG
-
-   # In ThrottleController.get_target_speed():
-   mu = SECTION_CONFIG[self.current_section]['friction']
-
-   # In submission.py step():
-   steerMultiplier *= SECTION_CONFIG[self.current_section]['steer_multiplier']
-
-   # In submission.py average_point():
-   if self.current_section in SECTION_CONFIG:
-       config = SECTION_CONFIG[self.current_section]['waypoint_smoothing']
-       next_waypoint_index = config['offset']
-       num_points = config['num_points']
-       max_shift_distance = config['max_shift']
 """
 
 SECTION_CONFIG = {
@@ -225,13 +202,11 @@ SECTION_CONFIG = {
 
 # Helper function to get friction coefficient
 def get_friction(section: int) -> float:
-    """Get friction coefficient for a given section."""
     return SECTION_CONFIG.get(section, {}).get("friction", 3.35)
 
 
 # Helper function to apply steering multiplier
 def apply_steer_multiplier(base_multiplier: float, section: int) -> float:
-    """Apply section-specific steering multiplier."""
     config = SECTION_CONFIG.get(section, {})
     multiplier = config.get("steer_multiplier", 1.0)
     mult_type = config.get("steer_multiplier_type", "multiply")
@@ -254,7 +229,6 @@ def apply_steer_multiplier(base_multiplier: float, section: int) -> float:
 
 
 # Helper function to get waypoint smoothing parameters
-# Note: This is a simplified version - you'll use SECTION_CONFIG directly in average_point()
 def get_waypoint_smoothing_config(section: int) -> dict:
     """Get waypoint smoothing configuration for a section."""
     return SECTION_CONFIG.get(section, {}).get(
