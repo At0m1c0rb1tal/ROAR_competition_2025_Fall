@@ -4,7 +4,7 @@ Recommended Section Configuration for 15 Sections
 
 SECTION_CONFIG = {
     0: {
-        "friction": 0.8,
+        "friction": 1.25,
         "steer_multiplier": 1.1,
         "steer_multiplier_type": "multiply",
         "waypoint_smoothing": {
@@ -14,7 +14,7 @@ SECTION_CONFIG = {
         },
     },
     1: {
-        "friction": 2.8,
+        "friction": 4.9,
         "steer_multiplier": 0.9,
         "steer_multiplier_type": "multiply",
         "waypoint_smoothing": {
@@ -24,7 +24,7 @@ SECTION_CONFIG = {
         },
     },
     2: {
-        "friction": 3.2,
+        "friction": 2.4,
         "steer_multiplier": 0.9,
         "steer_multiplier_type": "multiply",
         "waypoint_smoothing": {
@@ -34,7 +34,7 @@ SECTION_CONFIG = {
         },
     },
     3: {
-        "friction": 3.2,
+        "friction": 0.67,
         "steer_multiplier": 0.9,
         "steer_multiplier_type": "multiply",
         "waypoint_smoothing": {
@@ -44,7 +44,7 @@ SECTION_CONFIG = {
         },
     },
     4: {
-        "friction": 3.2,
+        "friction": 0.9,
         "steer_multiplier": 0.9,
         "steer_multiplier_type": "multiply",
         "waypoint_smoothing": {
@@ -54,7 +54,7 @@ SECTION_CONFIG = {
         },
     },
     5: {
-        "friction": 2.5,
+        "friction": 2.8,
         "steer_multiplier": 0.9,
         "steer_multiplier_type": "multiply",
         "waypoint_smoothing": {
@@ -64,7 +64,7 @@ SECTION_CONFIG = {
         },
     },
     6: {
-        "friction": 2.4,
+        "friction": 0.8,
         "steer_multiplier": 1.0,
         "steer_multiplier_type": "multiply",
         "waypoint_smoothing": {
@@ -74,7 +74,7 @@ SECTION_CONFIG = {
         },
     },
     7: {
-        "friction": 3.0,
+        "friction": 0.6,
         "steer_multiplier": 0.9,
         "steer_multiplier_type": "multiply",
         "waypoint_smoothing": {
@@ -84,7 +84,7 @@ SECTION_CONFIG = {
         },
     },
     8: {
-        "friction": 2.8,
+        "friction": 0.55,
         "steer_multiplier": 1.0,
         "steer_multiplier_type": "multiply",
         "waypoint_smoothing": {
@@ -104,7 +104,7 @@ SECTION_CONFIG = {
         },
     },
     10: {
-        "friction": 2.8,
+        "friction": 1.2,
         "steer_multiplier": 1.0,
         "steer_multiplier_type": "multiply",
         "waypoint_smoothing": {
@@ -114,7 +114,7 @@ SECTION_CONFIG = {
         },
     },
     11: {
-        "friction": 2.8,
+        "friction": 2.4,
         "steer_multiplier": 0.9,
         "steer_multiplier_type": "multiply",
         "waypoint_smoothing": {
@@ -124,7 +124,7 @@ SECTION_CONFIG = {
         },
     },
     12: {
-        "friction": 2.6,
+        "friction": 2.5,
         "steer_multiplier": 0.9,
         "steer_multiplier_type": "multiply",
         "waypoint_smoothing": {
@@ -134,7 +134,7 @@ SECTION_CONFIG = {
         },
     },
     13: {
-        "friction": 1.7,
+        "friction": 1.2,
         "steer_multiplier": 0.8,
         "steer_multiplier_type": "multiply",
         "waypoint_smoothing": {
@@ -144,7 +144,7 @@ SECTION_CONFIG = {
         },
     },
     14: {
-        "friction": 1.85,
+        "friction": 0.15,
         "steer_multiplier": 1.0,
         "steer_multiplier_type": "multiply",
         "waypoint_smoothing": {
@@ -154,31 +154,31 @@ SECTION_CONFIG = {
         },
     },
     15: {
-        "friction": 2.8,
+        "friction": 3.35,
         "steer_multiplier": 0.9,
         "steer_multiplier_type": "multiply",
         "waypoint_smoothing": {"offset": 6, "num_points": 6, "max_shift": 0.45},
     },
     16: {
-        "friction": 0.6,
+        "friction": 3.35,
         "steer_multiplier": 0.7,
         "steer_multiplier_type": "multiply",
         "waypoint_smoothing": {"offset": 6, "num_points": 4, "max_shift": 0.25},
     },
     17: {
-        "friction": 0.7,
+        "friction": 3.35,
         "steer_multiplier": 0.8,
         "steer_multiplier_type": "multiply",
         "waypoint_smoothing": {"offset": 4, "num_points": 4, "max_shift": 0.35},
     },
     18: {
-        "friction": 3.2,
+        "friction": 3.35,
         "steer_multiplier": 1.1,
         "steer_multiplier_type": "multiply",
         "waypoint_smoothing": {"offset": 12, "num_points": 8, "max_shift": 0.5},
     },
     19: {
-        "friction": 0.8,
+        "friction": 3.35,
         "steer_multiplier": 1.15,
         "steer_multiplier_type": "multiply",
         "waypoint_smoothing": {
@@ -188,7 +188,7 @@ SECTION_CONFIG = {
         },
     },
     20: {
-        "friction": 0.8,
+        "friction": 3.35,
         "steer_multiplier": 0.7,
         "steer_multiplier_type": "multiply",
         "waypoint_smoothing": {
