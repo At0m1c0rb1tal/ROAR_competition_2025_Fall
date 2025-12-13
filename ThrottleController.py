@@ -4,7 +4,7 @@ from collections import deque
 import numpy as np
 import roar_py_interface
 
-from section_config_15 import get_friction, get_waypoint_smoothing_config
+from section_config_21 import get_friction, get_waypoint_smoothing_config
 from SpeedData import SpeedData
 
 
